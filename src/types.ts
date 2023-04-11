@@ -4,4 +4,9 @@ export type LetterScoreDictionary = Record<KnownLetter, number>;
 
 export type InputChangeEvent = React.ChangeEventHandler<HTMLInputElement>
 export type FormSubmitEvent = React.FormEventHandler<HTMLFormElement>;
-export type SubmitWordEvent = (letterScore: number) => void;
+export type SubmitWordEvent = (wordScore: WordScore) => void;
+
+export interface WordScore {
+    word: string;
+    score: number;
+}

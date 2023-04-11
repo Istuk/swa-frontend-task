@@ -36,6 +36,7 @@ export const InputForm: React.FC<Props> = (props) => {
     const [error, setError] = useState<string>();
 
     const hasError = !!error;
+    const isSubmitDisabled = hasError || value === '';
 
     const handleChange: InputChangeEvent = (e) => {
         const word = e.target.value
@@ -65,14 +66,18 @@ export const InputForm: React.FC<Props> = (props) => {
 
         if (!score) return;
 
-        onSubmit(score);
+        onSubmit({
+            word: value,
+            score
+        });
+        setValue('');
     }
 
     return (
         <FormContainer onSubmit={handleSubmit}>
             { !!error && <Error>{error}</Error> }
             <WordInput value={value} onChange={handleChange} className={hasError ? 'is-error': undefined} placeholder="Enter word you want to score for" />
-            <SubmitInput type="submit" disabled={hasError} />
+            <SubmitInput type="submit" disabled={isSubmitDisabled} />
         </FormContainer>
     )
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { WordScore } from "../types";
 
 export const ScoreContainer = styled.p`
     width: 100%;
@@ -18,7 +19,7 @@ export const ScoreContainer = styled.p`
 `
 
 interface Props {
-    value: number | undefined;
+    value: WordScore | undefined;
 }
 
 export const Score: React.FC<Props> = (props) => {
@@ -29,7 +30,7 @@ export const Score: React.FC<Props> = (props) => {
     return (
         <ScoreContainer>
             {
-                isEmpty ? "Enter word to get score" : `Score is ${value}`
+                isEmpty ? "Enter word to get score" : `Score for "${value.word}" is ${value.score}`
             }
         </ScoreContainer>
     )

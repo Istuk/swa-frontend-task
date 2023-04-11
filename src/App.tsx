@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Container } from "./components/styled/Container";
-import { InputForm } from "./components/InputForm";
+import { useCallback, useState } from "react";
+import { MemoizedInputForm } from "./components/InputForm";
 import { Score } from "./components/Score";
-import { SubmitWordEvent } from "./types";
+import { Container } from "./components/styled/Container";
 import { Content } from "./components/styled/Content";
+import { SubmitWordEvent, WordScore } from "./types";
 
 export const App: React.FC = () => {
-    const [score, setScore] = useState<number>();
+    const [score, setScore] = useState<WordScore>();
 
-    const handleSubmit: SubmitWordEvent = (letterScore) => {
-        setScore(letterScore);
-    }
+    const handleSubmit: SubmitWordEvent = useCallback((wordScore) => {
+        setScore(wordScore);
+    }, []);
 
     return (
         <Container>
             <Content>
-                <InputForm onSubmit={handleSubmit} />
+                <MemoizedInputForm onSubmit={handleSubmit} />
                 <Score value={score} />
             </Content>
         </Container>
